@@ -2,8 +2,10 @@
 #include "filesAPI.h"
 
 void FilesApi::open() {
-	if (fopen_s(&ptr, filename, mode))
-		ptr = NULL;
+	if (!ptr) {
+		if (fopen_s(&ptr, filename, mode))
+			ptr = NULL;
+	}
 }
 
 void FilesApi::close() {
@@ -20,4 +22,11 @@ int FilesApi::read(char bufferRead[], int cant) {
 
 	int charRead = fread(bufferRead, cant, 1, ptr) * cant;
 	return charRead;
+}
+
+FilesApi::~FilesApi() {
+	if (ptr) {
+		close();
+		delete(ptr);
+	}
 }

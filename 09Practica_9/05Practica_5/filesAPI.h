@@ -10,7 +10,8 @@ private:
 	const char* mode;
 
 public:
-	FilesApi(const char* file, const char* mod) { filename = file; mode = mod; }
+	FilesApi(const char* file, const char* mod) { filename = file; mode = mod; ptr = nullptr; }
+	~FilesApi();
 	const char* getFilename() { return filename; }
 	void setFilename(const char* file) { filename = file; }
 	const char* getMode() { return mode; }
